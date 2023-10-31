@@ -1,16 +1,8 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import Movie from './Movie';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 
-const Row = ({ title, fetchURL, rowID }) => {
+const Row = ({ title, images, rowID }) => {
   const [movies, setMovies] = useState([]);
-
-  useEffect(() => {
-    axios.get(fetchURL).then((response) => {
-      setMovies(response.data.results);
-    });
-  }, [fetchURL]);
 
   const slideLeft = () => {
     var slider = document.getElementById('slider' + rowID);
@@ -20,6 +12,7 @@ const Row = ({ title, fetchURL, rowID }) => {
     var slider = document.getElementById('slider' + rowID);
     slider.scrollLeft = slider.scrollLeft + 500;
   };
+  
 
   return (
     <>
@@ -34,8 +27,10 @@ const Row = ({ title, fetchURL, rowID }) => {
           id={'slider' + rowID}
           className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative'
         >
-          {movies.map((item, id) => (
-            <Movie key={id} item={item} />
+          {images.map((image, id) => (
+            <div key={id} className='inline-block m-2'>
+            <img src={image} alt={`Image ${id}`} className='w-30 h-60 hover:scale-110 transform transition-transform duration-300 hover:shadow-md rounded-lg hover:shadow-orange-bottom' />
+          </div>
           ))}
         </div>
         <MdChevronRight

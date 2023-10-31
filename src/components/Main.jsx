@@ -28,7 +28,7 @@ const Main = () => {
         <div className='absolute w-full h-[600px] bg-gradient-to-r from-black'></div>
         <img
           className='w-full h-full object-cover'
-          src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
+          src='https://images.unsplash.com/photo-1542204637-e67bc7d41e48?auto=format&fit=crop&q=80&w=1035&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
           alt={movie?.title}
         />
         <div className='absolute w-full top-[20%] p-4 md:p-8'>
@@ -42,7 +42,7 @@ const Main = () => {
             </button>
           </div>
           <p className='text-gray-400 text-sm'>
-            Released: {movie?.release_date}
+            Released: 2023
           </p>
           <p className='w-full md:max-w-[70%] lg:max-w-[50%] xl:max-w-[35%] text-gray-200'>
             {truncateString(movie?.overview, 150)}
