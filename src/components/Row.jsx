@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const Row = ({ title, images, rowID }) => {
   const [movies, setMovies] = useState([]);
@@ -13,7 +15,6 @@ const Row = ({ title, images, rowID }) => {
     slider.scrollLeft = slider.scrollLeft + 500;
   };
   
-
   return (
     <>
       <h2 className='text-white font-bold md:text-xl p-4'>{title}</h2>
@@ -27,11 +28,14 @@ const Row = ({ title, images, rowID }) => {
           id={'slider' + rowID}
           className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative'
         >
+          <div>
           {images.map((image, id) => (
             <div key={id} className='inline-block m-2'>
             <img src={image} alt={`Image ${id}`} className='w-30 h-60 hover:scale-110 transform transition-transform duration-300 hover:shadow-md rounded-lg hover:shadow-orange-bottom' />
+            
           </div>
           ))}
+          </div>
         </div>
         <MdChevronRight
           onClick={slideRight}

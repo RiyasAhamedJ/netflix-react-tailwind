@@ -27,6 +27,7 @@ const Login = () => {
         className='hidden sm:block absolute w-full h-full object-cover'
         src='https://images.unsplash.com/photo-1698749039505-63b2bd057477?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
         alt='/'
+        
       />
       <div className='bg-black/60 fixed top-0 left-0 w-full h-screen'></div>
       <div className='fixed w-full px-4 py-24 z-50'>
