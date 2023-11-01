@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
+import { User } from 'react-feather';
 
 const Navbar = () => {
   const { user, logOut } = UserAuth();
@@ -20,6 +21,20 @@ const Navbar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const logoutFromSidebar = async () => {
+    try {
+      await logOut();
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const navigateToMovieSection = (section) => {
+    navigate(`/movies/${section}`);
+    toggleSidebar(); // Close the sidebar after navigation
+  };
+
   return (
     <div className='flex items-center justify-between p-4 z-[100] w-full absolute'>
       <Link to='/'>
@@ -28,24 +43,44 @@ const Navbar = () => {
         </h1>
       </Link>
       {user?.email ? (
-        <div>
+        <div className='flex items-center'>
           <Link to='/account'>
             <button className='text-white pr-4'>Account</button>
           </Link>
           <button
-            onClick={handleLogout}
-            className='bg-orange-600 px-6 py-2 rounded cursor-pointer text-white'
+            onClick={toggleSidebar}
+            className='relative inline-block group'
           >
-            Logout
+            <User className='mr-2' size={24} />
+            <span className='cursor-pointer'></span>
+            {isSidebarOpen && (
+              <div className='fixed top-0 right-0 h-screen bg-gray-900 text-white w-64'>
+                <div className='p-4'>
+                  <div className='mb-4'>
+                    <div className='py-2'>{user?.email}</div>
+                  </div>
+                  <hr />
+                  <div className='mb-4'>
+                    <div className='py-2 text-lg font-semibold'>Movies</div>
+                    <div className='py-2 hover:bg-orange-500'>Upcoming</div>
+                    <div className='py-2 hover:bg-orange-500'>Trending</div>
+                    <div className='py-2 hover:bg-orange-500'>BlockBuster</div>
+                    <div className='py-2 hover:bg-orange-500'>Top Rated</div>
+                    <div className='py-2 hover:bg-orange-500'>Horror</div>
+                  </div>
+                  <hr />
+                  <div className='mt-40'>
+                    <div className='py-2 hover:bg-orange-500'>
+                      <button onClick={logoutFromSidebar}>Logout</button>
+                    </div>
+                    <div className='py-2 hover:bg-orange-500'>
+                      <button onClick={toggleSidebar}>Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </button>
-          {user?.email && (
-            <button
-              onClick={toggleSidebar}
-              className='bg-orange-600 px-4 py-2 rounded cursor-pointer text-white'
-            >
-              Open Sidebar
-            </button>
-          )}
         </div>
       ) : (
         <div>
@@ -59,18 +94,6 @@ const Navbar = () => {
               Sign Up
             </button>
           </Link>
-        </div>
-      )}
-
-      {isSidebarOpen && (
-        <div className='sidebar'>
-          {/* Sidebar content */}
-          <ul>
-          <li className='py-2 hover:bg-orange-500'>Option 1</li>
-            <li className='py-2 hover:bg-orange-500'>Option 2</li>
-            <li className='py-2 hover:bg-orange-500'>Option 3</li>
-            {/* Add more sidebar items */}
-          </ul>
         </div>
       )}
     </div>
