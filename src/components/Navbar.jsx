@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
 import { User } from 'react-feather';
+import { IconName } from 'react-feather';
 
 const Navbar = () => {
   const { user, logOut } = UserAuth();
@@ -45,35 +46,36 @@ const Navbar = () => {
       {user?.email ? (
         <div className='flex items-center'>
           <Link to='/account'>
-            <button className='text-white pr-4'>Account</button>
+           
           </Link>
           <button
             onClick={toggleSidebar}
             className='relative inline-block group'
           >
             <User className='mr-2' size={24} />
-            <span className='cursor-pointer'></span>
+            <span style={{ color: 'orange' }}></span>
             {isSidebarOpen && (
               <div className='fixed top-0 right-0 h-screen bg-gray-900 text-white w-64'>
                 <div className='p-4'>
-                  <div className='mb-4'>
+                <div className='mb-4 flex items-center'>
+                  <User size={24} className='mr-9' />
                     <div className='py-2'>{user?.email}</div>
                   </div>
                   <hr />
                   <div className='mb-4'>
                     <div className='py-2 text-lg font-semibold'>Movies</div>
-                    <div className='py-2 hover:bg-orange-500'>Upcoming</div>
-                    <div className='py-2 hover:bg-orange-500'>Trending</div>
-                    <div className='py-2 hover:bg-orange-500'>BlockBuster</div>
-                    <div className='py-2 hover:bg-orange-500'>Top Rated</div>
-                    <div className='py-2 hover:bg-orange-500'>Horror</div>
+                    <div className='py-2 hover:bg-orange-500 rounded-lg'>Upcoming</div>
+                    <div className='py-2 hover:bg-orange-500 rounded-lg'>Trending</div>
+                    <div className='py-2 hover:bg-orange-500 rounded-lg'>BlockBuster</div>
+                    <div className='py-2 hover:bg-orange-500 rounded-lg'>Top Rated</div>
+                    <div className='py-2 hover:bg-orange-500 rounded-lg'>Horror</div>
                   </div>
                   <hr />
                   <div className='mt-40'>
-                    <div className='py-2 hover:bg-orange-500'>
+                    <div className='py-2 hover:bg-orange-500 rounded-lg'>
                       <button onClick={logoutFromSidebar}>Logout</button>
                     </div>
-                    <div className='py-2 hover:bg-orange-500'>
+                    <div className='py-2 hover:bg-orange-500 rounded-lg'>
                       <button onClick={toggleSidebar}>Close</button>
                     </div>
                   </div>
