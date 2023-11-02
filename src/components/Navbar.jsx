@@ -1,22 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
-import { User } from 'react-feather';
-import { IconName } from 'react-feather';
+import { User, LogOut } from 'react-feather';
 
 const Navbar = () => {
   const { user, logOut } = UserAuth();
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  const handleLogout = async () => {
-    try {
-      await logOut();
-      navigate('/');
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -25,15 +15,14 @@ const Navbar = () => {
   const logoutFromSidebar = async () => {
     try {
       await logOut();
-      navigate('/');
+      navigate('/login');
     } catch (error) {
       console.log(error);
     }
   };
 
-  const navigateToMovieSection = (section) => {
-    navigate(`/movies/${section}`);
-    toggleSidebar(); // Close the sidebar after navigation
+  const sidebarStyle = {
+    background: 'rgba(128, 128, 128, 1.0)',
   };
 
   return (
@@ -45,38 +34,44 @@ const Navbar = () => {
       </Link>
       {user?.email ? (
         <div className='flex items-center'>
-          <Link to='/account'>
-           
-          </Link>
+          <Link to='/account'></Link>
           <button
             onClick={toggleSidebar}
             className='relative inline-block group'
           >
-            <User className='mr-2' size={24} />
+            <div className='relative'>
+              <div className='rounded-full bg-yellow-600 p-2'>
+                <User className='text-white' size={35} />
+              </div>
+            </div>
             <span style={{ color: 'orange' }}></span>
             {isSidebarOpen && (
-              <div className='fixed top-0 right-0 h-screen bg-gray-900 text-white w-64'>
-                <div className='p-4'>
-                <div className='mb-4 flex items-center'>
-                  <User size={24} className='mr-9' />
-                    <div className='py-2'>{user?.email}</div>
-                  </div>
-                  <hr />
-                  <div className='mb-4'>
-                    <div className='py-2 text-lg font-semibold'>Movies</div>
-                    <div className='py-2 hover:bg-orange-500 rounded-lg'>Upcoming</div>
-                    <div className='py-2 hover:bg-orange-500 rounded-lg'>Trending</div>
-                    <div className='py-2 hover:bg-orange-500 rounded-lg'>BlockBuster</div>
-                    <div className='py-2 hover:bg-orange-500 rounded-lg'>Top Rated</div>
-                    <div className='py-2 hover:bg-orange-500 rounded-lg'>Horror</div>
-                  </div>
-                  <hr />
-                  <div className='mt-40'>
-                    <div className='py-2 hover:bg-orange-500 rounded-lg'>
-                      <button onClick={logoutFromSidebar}>Logout</button>
+              <div className='fixed top-0 right-0' style={sidebarStyle}>
+                <div className='text-black w-64'>
+                  <div className='p-4'>
+                    <div className='mb-4 flex items-center'>
+                      <User size={32} className='mr-2' />
+                      <div className='py-4 text-center user-section'>{user?.email}</div>
                     </div>
-                    <div className='py-2 hover:bg-orange-500 rounded-lg'>
-                      <button onClick={toggleSidebar}>Close</button>
+                    <hr />
+                    <div className='py-2 rounded-lg'>
+                      <button
+                        onClick={logoutFromSidebar}
+                        style={{ cursor: 'pointer' }}
+                        className='flex items-center text-black hover:bg-yellow-600 px-2 rounded p-2'
+                      >
+                        <LogOut className='mr-2' size={16} />
+                        Log Out
+                      </button>
+                    </div>
+                    <div className='py-2 rounded-lg'>
+                      <button
+                        onClick={toggleSidebar}
+                        style={{ cursor: 'pointer' }}
+                        className='flex items-center text-black hover:bg-gray-600 px-8 py-2 rounded p-2'
+                      >
+                        Close
+                      </button>
                     </div>
                   </div>
                 </div>

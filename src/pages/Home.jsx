@@ -1,7 +1,6 @@
-import React from 'react'
-import Main from '../components/Main'
-import Row from '../components/Row'
-
+import React from 'react';
+import Main from '../components/Main';
+import Row from '../components/Row';
 
 const Home = () => {
   const row1Images = [
@@ -72,14 +71,14 @@ const Home = () => {
   ];
   return (
     <>
-        <Main />
-        <Row rowID='1' title='Upcoming Movies' images={row1Images} />
-        <Row rowID='2' title='Trending Movies' images={row2Images} />
-        <Row rowID='3' title='BlockBuster Movies' images={row3Images} />
-        <Row rowID='4' title='Top Rated Movies' images={row4Images} />
-        <Row rowID='5' title='Horror Movies' images={row5Images} />
+      <Main />
+      <Row rowID='1' title='Upcoming Movies' images={row1Images} />
+      <Row rowID='2' title='Trending Movies' images={row2Images} />
+      <Row rowID='3' title='BlockBuster Movies' images={row3Images} />
+      <Row rowID='4' title='Top Rated Movies' images={row4Images} />
+      <Row rowID='5' title='Horror Movies' images={row5Images} />
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
